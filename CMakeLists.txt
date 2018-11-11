@@ -11,25 +11,20 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC ")
 set(CMAKE_BUILD_TYPE Release)
 
 set(CMAKE_AUTOMOC on)
-find_package(Qt5Widgets)
-find_package(OpenCV REQUIRED)
 find_package(Protobuf REQUIRED)
 
 include_directories(
                     ${CMAKE_SOURCE_DIR}/inc/
+		    /usr/include/
+		    /usr/local/cuda/include
   )
 
 #Add external include directories
 include_directories(
   /usr/local/include/
   /usr/local/ffmpeg/include/
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/
-  /usr/include/x86_64-linux-gnu/qt5/QtGui/
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/
-  /usr/include/x86_64-linux-gnu/qt5/
-
-  ${OpenCV_INCLUDE_DIRS}
   ${PROJECT_SOURCE_DIR}/inc/
+  ${PROJECT_SOURCE_DIR}/common/inc/
   )
 
 #Link external libraries diectories
@@ -59,6 +54,7 @@ link_libraries(
 set(SRC "" CACHE INTERNAL "")
 file(GLOB SRC
   src/*.c src/*.cpp
+  common/src/*.c common/src/*.cpp
   )
 
 #Create project library
